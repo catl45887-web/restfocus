@@ -42,7 +42,7 @@
             <svg viewBox="0 0 280 280" aria-hidden="true"><circle class="ring-track" cx="140" cy="140" r="126"/><circle id="ringProgress" class="ring-progress" cx="140" cy="140" r="126"/></svg>
             <div class="timer-face"><div id="timerLabel" class="timer-label">准备开始</div><div id="timerDisplay" class="timer-display">25:00</div><div id="timerSub" class="timer-sub">专注当下，一步一步来</div></div>
           </div>
-          <div id="durationControl" class="duration-control"><button id="minusDuration" aria-label="减少时长">−</button><span><b id="durationValue">25</b> 分钟</span><button id="plusDuration" aria-label="增加时长">＋</button></div>
+          <div id="durationControl" class="duration-control"><button id="minusDuration" aria-label="减少 5 分钟">−</button><span><b id="durationValue">25</b> 分 <b id="secondsValue">00</b> 秒</span><button id="plusDuration" aria-label="增加 5 分钟">＋</button><button id="minusSecond" aria-label="减少 1 秒">−秒</button><button id="plusSecond" aria-label="增加 1 秒">＋秒</button></div>
           <div class="timer-actions"><button id="startBtn" class="primary-btn">开始专注</button><button id="finishBtn" class="outline-btn" hidden>结束并分配</button><button id="resetBtn" class="quiet-btn" disabled>重置</button></div>
           <p class="timer-note">任务清单与计时相互独立，你可以按自己的节奏安排。</p>
         </div>
@@ -86,6 +86,7 @@
     </section>
   </main>
 
+  <dialog id="completionDialog" class="modal compact-modal"><div class="eyebrow">这一轮完成了</div><h2>做得很好，专注的时间值得肯定。</h2><p class="modal-hint">慢慢来，你已经为自己认真投入了一段时间。</p><div class="modal-actions"><button id="completionContinue" type="button" class="primary-btn">继续</button></div></dialog>
   <dialog id="allocationDialog" class="modal"><form method="dialog" id="allocationForm"><div class="modal-heading"><div><div class="eyebrow">本轮专注已完成</div><h2>时间都去了哪里？</h2><p id="allocationCaption"></p></div><button class="close-btn" value="cancel" aria-label="关闭">×</button></div><div id="allocationRows" class="allocation-rows"></div><div class="allocation-summary"><span>本轮 <b id="allocationTotal">0</b> 分钟</span><span>剩余 <b id="allocationRemaining">0</b> 分钟</span></div><div class="modal-actions"><button id="saveAllocation" type="button" class="primary-btn">保存并休息</button></div></form></dialog>
   <dialog id="restChoiceDialog" class="modal compact-modal"><form method="dialog"><div class="eyebrow">本轮专注已完成</div><h2>现在播放预选的视频吗？</h2><p id="restChoiceName" class="modal-hint"></p><div class="modal-actions"><button id="restChoiceNo" class="outline-btn" value="no">否，留白休息</button><button id="restChoiceYes" class="primary-btn" value="yes">是，播放视频</button></div></form></dialog>
   <dialog id="reflectDialog" class="modal compact-modal"><form method="dialog"><div class="eyebrow">休息结束</div><h2>这次休息真正放松了吗？</h2><p class="modal-hint">你的感受会和本轮专注记录一起保存。</p><div class="modal-actions"><button class="outline-btn" value="no">否</button><button class="primary-btn" value="yes">是</button></div></form></dialog>
