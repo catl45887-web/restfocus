@@ -1,0 +1,17 @@
+{
+  "id": "./",
+  "name": "Restfocus · 安静专注",
+  "short_name": "Restfocus",
+  "description": "低压力的专注计时与安静休息。",
+  "lang": "zh-CN",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#f6f4ee",
+  "theme_color": "#f6f4ee",
+  "icons": [
+    { "src": "icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }
+  ]
+}
+
