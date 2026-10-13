@@ -61,7 +61,7 @@
     </section>
 
     <section id="libraryPage" class="page">
-      <div class="page-heading"><div><div class="eyebrow">没有推荐流，只有你选好的片刻</div><h1>休息素材库</h1><p>从设备中添加护眼、拉伸或冥想视频，在休息时按需播放。</p></div><button id="newVideoBtn" type="button" class="primary-btn">＋ 上传 MP4</button></div>
+      <div class="page-heading"><div><div class="eyebrow">没有推荐流，只有你选好的片刻</div><h1>休息素材库</h1><p>从设备中添加护眼、拉伸或冥想视频，在休息时按需播放。</p></div><label id="newVideoBtn" class="primary-btn upload-trigger">＋ 上传 MP4<input id="videoFilePicker" type="file" accept="video/mp4,.mp4" aria-label="选择 MP4 视频文件" /></label></div>
       <div class="library-intro"><span>◌</span><p>视频文件保存在当前设备的浏览器中，不会上传到外部服务器。</p></div>
       <div class="video-list library-list" id="allVideos"></div>
     </section>
@@ -91,7 +91,6 @@
   <dialog id="restChoiceDialog" class="modal compact-modal"><form method="dialog"><div class="eyebrow">本轮专注已完成</div><h2>现在播放预选的视频吗？</h2><p id="restChoiceName" class="modal-hint"></p><div class="modal-actions"><button id="restChoiceNo" class="outline-btn" value="no">否，留白休息</button><button id="restChoiceYes" class="primary-btn" value="yes">是，播放视频</button></div></form></dialog>
   <dialog id="reflectDialog" class="modal compact-modal"><form method="dialog"><div class="eyebrow">休息结束</div><h2>这次休息真正放松了吗？</h2><p class="modal-hint">你的感受会和本轮专注记录一起保存。</p><div class="modal-actions"><button class="outline-btn" value="no">否</button><button class="primary-btn" value="yes">是</button></div></form></dialog>
   <dialog id="formDialog" class="modal"><form method="dialog" id="entityForm"><div class="modal-heading"><div><div class="eyebrow">Restfocus</div><h2 id="formTitle">新建</h2></div><button class="close-btn" value="cancel" aria-label="关闭">×</button></div><div id="formFields" class="form-fields"></div><div class="modal-actions"><button class="outline-btn" value="cancel">取消</button><button id="formSave" class="primary-btn" value="default">确认</button></div></form></dialog>
-  <input id="videoFilePicker" type="file" accept="video/mp4,.mp4" hidden aria-label="选择 MP4 视频文件" />
   <div id="toast" class="toast" role="status"></div>
   <script src="app.js"></script>
 </body>

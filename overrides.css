@@ -4,3 +4,5 @@
 
 .duration-control{display:flex;align-items:center;justify-content:center;gap:12px}.duration-unit{display:grid;justify-items:center;gap:4px}.duration-unit-label,.duration-unit small{font-size:9px;color:#999b92}.duration-unit select{min-width:76px;padding:8px 22px 8px 12px;border:1px solid var(--line);border-radius:10px;background:#fffefa;color:var(--ink);font:inherit;font-size:14px;text-align:center;font-variant-numeric:tabular-nums}.duration-separator{font-size:18px;color:#aaa99f;margin-top:4px}
 
+.upload-trigger{position:relative;display:inline-flex;align-items:center;overflow:hidden;cursor:pointer}.upload-trigger input{position:absolute;inset:0;width:100%;height:100%;opacity:0;cursor:pointer;font-size:100px}
+
