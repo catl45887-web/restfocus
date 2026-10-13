@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <meta name="theme-color" content="#f6f4ee" />
+  <meta name="description" content="Restfocus：安静、低压力的专注与休息。" />
+  <link rel="manifest" href="manifest.webmanifest" />
+  <link rel="icon" href="icon.svg" type="image/svg+xml" />
+  <link rel="apple-touch-icon" href="icon.svg" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="overrides.css" />
+  <title>Restfocus · 安静专注</title>
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="#home" aria-label="Restfocus 首页"><span class="brand-mark">r</span><span>restfocus</span></a>
+    <nav class="nav" aria-label="主导航">
+      <button class="nav-link active" data-page="home">专注</button>
+      <button class="nav-link" data-page="tasks">任务仓库</button>
+      <button class="nav-link" data-page="library">休息素材</button>
+      <button class="nav-link" data-page="stats">统计</button>
+    </nav>
+    <button id="installBtn" class="install-btn">安装 App</button>
+  </header>
+
+  <main>
+    <section id="homePage" class="page active">
+      <div class="home-layout">
+        <div class="timer-column">
+          <div class="eyebrow"><span class="live-dot"></span>给自己一点安静时间</div>
+          <div class="preference-card">
+            <label for="focusRestVideo">本轮结束后的休息</label>
+            <select id="focusRestVideo"><option value="">留白安静休息</option></select>
+            <div class="preference-bottom"><span>休息时长</span><div><button class="rest-preset selected" data-minutes="5">5 分钟</button><button class="rest-preset" data-minutes="15">15 分钟</button></div></div>
+          </div>
+          <div class="mode-switch" role="tablist">
+            <button id="countdownMode" class="selected">倒计时</button>
+            <button id="stopwatchMode">正计时</button>
+          </div>
+          <div class="timer-ring" id="timerRing">
+            <svg viewBox="0 0 280 280" aria-hidden="true"><circle class="ring-track" cx="140" cy="140" r="126"/><circle id="ringProgress" class="ring-progress" cx="140" cy="140" r="126"/></svg>
+            <div class="timer-face"><div id="timerLabel" class="timer-label">准备开始</div><div id="timerDisplay" class="timer-display">25:00</div><div id="timerSub" class="timer-sub">专注当下，一步一步来</div></div>
+          </div>
+          <div id="durationControl" class="duration-control"><button id="minusDuration" aria-label="减少时长">−</button><span><b id="durationValue">25</b> 分钟</span><button id="plusDuration" aria-label="增加时长">＋</button></div>
+          <div class="timer-actions"><button id="startBtn" class="primary-btn">开始专注</button><button id="finishBtn" class="outline-btn" hidden>结束并分配</button><button id="resetBtn" class="quiet-btn" disabled>重置</button></div>
+          <p class="timer-note">任务清单与计时相互独立，你可以按自己的节奏安排。</p>
+        </div>
+        <aside id="taskBoard" class="task-board">
+          <div class="board-heading"><div><div class="eyebrow">侧边看板</div><h2>此刻的清单</h2></div><select id="boardGroupSelect" aria-label="选择待办集"></select></div>
+          <div id="boardTasks" class="board-tasks"></div>
+          <button id="quickAddBtn" class="quick-add">＋ 临时添加任务</button>
+          <div class="board-foot">勾选任务不会影响计时</div>
+        </aside>
+      </div>
+    </section>
+
+    <section id="tasksPage" class="page">
+      <div class="page-heading"><div><div class="eyebrow">轻轻整理，不必赶路</div><h1>任务仓库</h1><p>任务只是陪伴计时的清单，可以自由选择今天想看的待办集。</p></div><button id="newGroupBtn" class="primary-btn">＋ 新建待办集</button></div>
+      <div class="warehouse-layout"><aside id="groupList" class="group-list"></aside><div class="warehouse-main"><div class="warehouse-toolbar"><h2 id="groupTitle">我的待办集</h2><button id="newTaskBtn" class="outline-btn">＋ 新建任务</button></div><div id="warehouseTasks" class="warehouse-tasks"></div></div></div>
+    </section>
+
+    <section id="libraryPage" class="page">
+      <div class="page-heading"><div><div class="eyebrow">没有推荐流，只有你选好的片刻</div><h1>休息素材库</h1><p>从设备中添加护眼、拉伸或冥想视频，在休息时按需播放。</p></div><button id="newVideoBtn" class="primary-btn">＋ 上传 MP4</button></div>
+      <div class="library-intro"><span>◌</span><p>视频文件保存在当前设备的浏览器中，不会上传到外部服务器。</p></div>
+      <div class="video-list library-list" id="allVideos"></div>
+    </section>
+
+    <section id="statsPage" class="page">
+      <div class="page-heading"><div><div class="eyebrow">看见自己的节奏</div><h1>专注统计</h1><p>只记录完成的专注与每日循环任务打卡。</p></div><select id="statsFilter" class="filter-select"><option value="all">全部任务</option><option value="daily">每日循环任务</option><option value="once">一次性任务</option></select></div>
+      <div class="stat-cards"><article class="stat-card"><span>累计专注</span><strong id="totalFocus">0 分钟</strong></article><article class="stat-card"><span>今日专注次数</span><strong id="todaySessions">0</strong></article><article class="stat-card"><span>今日专注时长</span><strong id="todayMinutes">0 分钟</strong></article><article class="stat-card"><span>今日放弃次数</span><strong id="todayAbandons">0</strong></article></div>
+      <article class="panel feedback-panel"><div class="panel-heading"><div><h2>休息感受</h2><p>和每轮专注记录绑定保存</p></div></div><div class="feedback-counts"><span>真正放松 <b id="restYesCount">0</b></span><span>没有放松 <b id="restNoCount">0</b></span></div></article>
+      <div class="charts-grid"><article class="panel"><div class="panel-heading"><div><h2>今日专注时段</h2><p>完成的专注时段分布</p></div></div><div id="todayChart" class="bar-chart"></div></article><article class="panel"><div class="panel-heading"><div><h2>本月专注时段</h2><p>按日期汇总专注分钟</p></div></div><div id="monthChart" class="bar-chart month-chart"></div></article></div>
+      <article class="panel task-totals"><div class="panel-heading"><div><h2>任务累计时长</h2><p>包含分配给任务的专注时间</p></div></div><div id="taskTotals"></div></article>
+      <article class="panel calendar-panel"><div class="panel-heading"><div><h2>每日循环任务打卡</h2><p>仅显示每日循环任务，不含一次性任务</p></div><div class="calendar-controls"><button id="prevMonth" aria-label="上个月">‹</button><span id="calendarMonth"></span><button id="nextMonth" aria-label="下个月">›</button></div></div><div id="calendar" class="calendar"></div><div id="calendarLegend" class="calendar-legend"></div></article>
+    </section>
+
+    <section id="restPage" class="page rest-page">
+      <div class="rest-shell"><div class="eyebrow"><span class="live-dot"></span>专注告一段落</div><h1>现在，休息一下。</h1><p class="rest-description">不需要做任何事。让眼睛和肩膀都松下来。</p>
+        <div class="rest-clock"><span id="restLabel">短休息</span><strong id="restDisplay">05:00</strong></div>
+        <div class="rest-duration-row"><span id="restPresetLabel">预设休息 · 5 分钟</span></div>
+        <div class="rest-stage"><div class="rest-player" id="restPlayer"><div class="player-placeholder"><span>☼</span><p>选一段收藏的视频，或就这样安静休息。</p></div></div><div class="rest-progress" aria-label="休息进度"><svg viewBox="0 0 48 48"><circle cx="24" cy="24" r="20"></circle><circle id="restProgress" class="rest-progress-value" cx="24" cy="24" r="20"></circle></svg><span id="restProgressLabel">05:00</span></div></div>
+        <div id="restVideoName" class="rest-video-name"></div>
+        <div class="rest-actions"><button id="playFallbackBtn" class="outline-btn" hidden>没有自动播放？点此开始播放</button><button id="cancelPlayBtn" class="outline-btn" hidden>取消播放，切换留白</button></div>
+      </div>
+    </section>
+  </main>
+
+  <dialog id="allocationDialog" class="modal"><form method="dialog" id="allocationForm"><div class="modal-heading"><div><div class="eyebrow">本轮专注已完成</div><h2>时间都去了哪里？</h2><p id="allocationCaption"></p></div><button class="close-btn" value="cancel" aria-label="关闭">×</button></div><div id="allocationRows" class="allocation-rows"></div><div class="allocation-summary"><span>本轮 <b id="allocationTotal">0</b> 分钟</span><span>剩余 <b id="allocationRemaining">0</b> 分钟</span></div><div class="modal-actions"><button id="saveAllocation" class="primary-btn" value="default">保存并休息</button></div></form></dialog>
+  <dialog id="restChoiceDialog" class="modal compact-modal"><form method="dialog"><div class="eyebrow">本轮专注已完成</div><h2>现在播放预选的视频吗？</h2><p id="restChoiceName" class="modal-hint"></p><div class="modal-actions"><button id="restChoiceNo" class="outline-btn" value="no">否，留白休息</button><button id="restChoiceYes" class="primary-btn" value="yes">是，播放视频</button></div></form></dialog>
+  <dialog id="reflectDialog" class="modal compact-modal"><form method="dialog"><div class="eyebrow">休息结束</div><h2>这次休息真正放松了吗？</h2><p class="modal-hint">你的感受会和本轮专注记录一起保存。</p><div class="modal-actions"><button class="outline-btn" value="no">否</button><button class="primary-btn" value="yes">是</button></div></form></dialog>
+  <dialog id="formDialog" class="modal"><form method="dialog" id="entityForm"><div class="modal-heading"><div><div class="eyebrow">Restfocus</div><h2 id="formTitle">新建</h2></div><button class="close-btn" value="cancel" aria-label="关闭">×</button></div><div id="formFields" class="form-fields"></div><div class="modal-actions"><button class="outline-btn" value="cancel">取消</button><button id="formSave" class="primary-btn" value="default">确认</button></div></form></dialog>
+  <div id="toast" class="toast" role="status"></div>
+  <script src="app.js"></script>
+</body>
+</html>
+
