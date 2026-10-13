@@ -1,4 +1,4 @@
-const CACHE='restfocus-shell-v12';
+const CACHE='restfocus-shell-v13';
 const CORE=['./','./index.html','./styles.css','./overrides.css','./app.js','./manifest.webmanifest','./icon.svg'];
 self.addEventListener('install',event=>event.waitUntil(caches.open(CACHE).then(cache=>cache.addAll(CORE)).then(()=>self.skipWaiting())));
 self.addEventListener('activate',event=>event.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(key=>key!==CACHE).map(key=>caches.delete(key)))).then(()=>self.clients.claim())));
