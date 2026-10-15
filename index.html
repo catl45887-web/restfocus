@@ -30,9 +30,9 @@
         <div class="timer-column">
           <div class="eyebrow"><span class="live-dot"></span>给自己一点安静时间</div>
           <div class="preference-card">
-            <label for="focusRestVideo">本轮结束后的休息</label>
+            <label for="focusRestVideo">默认休息视频（休息时可更换）</label>
             <select id="focusRestVideo"><option value="">留白安静休息</option></select>
-            <div class="preference-bottom"><span>休息时长</span><div><button class="rest-preset selected" data-minutes="5">5 分钟</button><button class="rest-preset" data-minutes="15">15 分钟</button></div></div>
+            <div class="preference-bottom"><span>休息时长</span><div class="rest-duration-settings"><label><input id="breakMinutesInput" type="number" min="0" max="120" value="5" aria-label="休息分钟"> 分</label><label><input id="breakSecondsInput" type="number" min="0" max="59" value="0" aria-label="休息秒"> 秒</label></div></div>
           </div>
           <div class="mode-switch" role="tablist">
             <button id="countdownMode" class="selected">倒计时</button>
@@ -77,18 +77,20 @@
 
     <section id="restPage" class="page rest-page">
       <div class="rest-shell"><div class="eyebrow"><span class="live-dot"></span>专注告一段落</div><h1>现在，休息一下。</h1><p class="rest-description">不需要做任何事。让眼睛和肩膀都松下来。</p>
-        <div class="rest-clock"><span id="restLabel">短休息</span><strong id="restDisplay">05:00</strong></div>
+        <div class="rest-clock"><span id="restLabel">休息中</span><strong id="restDisplay">05:00</strong></div>
         <div class="rest-duration-row"><span id="restPresetLabel">预设休息 · 5 分钟</span></div>
-        <div class="rest-stage"><div class="rest-player" id="restPlayer"><div class="player-placeholder"><span>☼</span><p>选一段收藏的视频，或就这样安静休息。</p></div></div><div class="rest-progress" aria-label="休息进度"><svg viewBox="0 0 48 48"><circle cx="24" cy="24" r="20"></circle><circle id="restProgress" class="rest-progress-value" cx="24" cy="24" r="20"></circle></svg><span id="restProgressLabel">05:00</span></div></div>
+        <div class="rest-video-select"><label for="breakVideoSelect">休息视频</label><select id="breakVideoSelect" aria-label="选择休息视频"><option value="">留白安静休息</option></select><button id="replayBreakVideoBtn" class="icon-btn" type="button" hidden>重新播放</button></div>
+        <p id="breakVideoStatus" class="break-video-status" role="status">可以选择视频跟练，也可以安静休息。</p>
+        <div class="rest-stage"><div class="rest-player" id="restPlayer"><div class="player-placeholder"><span>☼</span><p>选择一段素材，或就这样安静休息。</p></div></div><div class="rest-progress" aria-label="休息进度"><svg viewBox="0 0 48 48"><circle cx="24" cy="24" r="20"></circle><circle id="restProgress" class="rest-progress-value" cx="24" cy="24" r="20"></circle></svg><span id="restProgressLabel">05:00</span></div></div>
         <div id="restVideoName" class="rest-video-name"></div>
-        <div class="rest-actions"><button id="playFallbackBtn" class="outline-btn" hidden>没有自动播放？点此开始播放</button><button id="cancelPlayBtn" class="outline-btn" hidden>取消播放，切换留白</button></div>
+        <div id="breakControls" class="rest-actions"><button id="breakPauseBtn" class="outline-btn" type="button">暂停休息</button><button id="skipBreakBtn" class="outline-btn" type="button">跳过休息</button><button id="endRoundBtn" class="quiet-btn" type="button">结束本轮</button><button id="allocateFocusBtn" class="quiet-btn" type="button">分配本轮专注时间</button></div>
+        <div id="breakCompleteActions" class="break-complete-actions" hidden><p>这次休息真正放松了吗？</p><div class="rest-actions"><button id="restQualityYes" class="outline-btn" type="button">是</button><button id="restQualityNo" class="outline-btn" type="button">否</button></div><div class="rest-actions"><button id="startNextRoundBtn" class="primary-btn" type="button">开始下一轮专注</button><button id="finishUseBtn" class="quiet-btn" type="button">结束使用</button></div></div>
       </div>
     </section>
   </main>
 
   <dialog id="completionDialog" class="modal compact-modal"><div class="eyebrow">这一轮完成了</div><h2>做得很好，专注的时间值得肯定。</h2><p class="modal-hint">慢慢来，你已经为自己认真投入了一段时间。</p><div class="modal-actions"><button id="completionContinue" type="button" class="primary-btn">继续</button></div></dialog>
   <dialog id="allocationDialog" class="modal"><form method="dialog" id="allocationForm"><div class="modal-heading"><div><div class="eyebrow">本轮专注已完成</div><h2>时间都去了哪里？</h2><p id="allocationCaption"></p></div><button class="close-btn" value="cancel" aria-label="关闭">×</button></div><div id="allocationRows" class="allocation-rows"></div><div class="allocation-summary"><span>本轮 <b id="allocationTotal">0</b> 分钟</span><span>剩余 <b id="allocationRemaining">0</b> 分钟</span></div><div class="modal-actions"><button id="saveAllocation" type="button" class="primary-btn">保存并休息</button></div></form></dialog>
-  <dialog id="restChoiceDialog" class="modal compact-modal"><form method="dialog"><div class="eyebrow">本轮专注已完成</div><h2>现在播放预选的视频吗？</h2><p id="restChoiceName" class="modal-hint"></p><div class="modal-actions"><button id="restChoiceNo" class="outline-btn" value="no">否，留白休息</button><button id="restChoiceYes" class="primary-btn" value="yes">是，播放视频</button></div></form></dialog>
   <dialog id="reflectDialog" class="modal compact-modal"><form method="dialog"><div class="eyebrow">休息结束</div><h2>这次休息真正放松了吗？</h2><p class="modal-hint">你的感受会和本轮专注记录一起保存。</p><div class="modal-actions"><button class="outline-btn" value="no">否</button><button class="primary-btn" value="yes">是</button></div></form></dialog>
   <dialog id="formDialog" class="modal"><form method="dialog" id="entityForm"><div class="modal-heading"><div><div class="eyebrow">Restfocus</div><h2 id="formTitle">新建</h2></div><button class="close-btn" value="cancel" aria-label="关闭">×</button></div><div id="formFields" class="form-fields"></div><div class="modal-actions"><button class="outline-btn" value="cancel">取消</button><button id="formSave" class="primary-btn" value="default">确认</button></div></form></dialog>
   <div id="toast" class="toast" role="status"></div>
